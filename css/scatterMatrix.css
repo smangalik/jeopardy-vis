@@ -1,0 +1,71 @@
+body {
+  font: 12px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text { display: none; }
+
+.dot {
+  stroke: #000;
+}   
+
+div.filler {
+	width: 100%;
+	background-color:#00FF00;
+}
+
+
+span.row1 {
+	color: blue;
+	position: absolute;
+	top: 65px;
+	left: 525px;
+	white-space:nowrap;
+}
+
+span.row2 {
+	color: blue;
+	position: absolute;
+	top: 170px;
+	left: 525px;
+	white-space:nowrap;
+}
+
+span.row3 {
+	color: blue;
+	position: absolute;
+	top: 275px;
+	left: 525px;
+	white-space:nowrap;
+}
+
+span.row4 {
+	color: blue;
+	position: absolute;
+	top: 380px;
+	left: 525px;
+	white-space:nowrap;
+}
+
+span.row5 {
+	color: blue;
+	position: absolute;
+	top: 485px;
+	left: 525px;
+	white-space:nowrap;
+}
+
+span.row6 {
+	color: blue;
+	position: absolute;
+	top: 530px;
+	left: 40px;
+	white-space:nowrap;
+}
+

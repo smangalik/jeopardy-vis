@@ -1,0 +1,115 @@
+/* All SVG's fade in */
+svg {
+	font: 12px sans-serif;
+	-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: fadein 2s; /* Firefox < 16 */
+	-ms-animation: fadein 2s; /* Internet Explorer */
+	-o-animation: fadein 2s; /* Opera < 12.1 */
+	animation: fadein 2s;
+}
+@keyframes fadein {
+from {
+	opacity: 0;
+}
+to {
+	opacity: 1;
+}
+}
+
+.background path {
+	fill: none;
+	stroke: #ddd; /** light gray */
+	shape-rendering: crispEdges;
+}
+
+.foreground path {
+	fill: none;
+	stroke: rgb(6,12,233);
+}
+
+.brush .extent {
+	fill-opacity: .3;
+	stroke: rgb(255, 200, 0);
+	shape-rendering: crispEdges;
+}
+
+.axis line, .axis path {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+
+.axis text {
+	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+	cursor: move;
+}
+
+.tooltip {
+	position: absolute;
+	width: 200px;
+	height: 28px;
+	pointer-events: none;
+}
+
+table {
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+}
+th {
+	font-size: 12px;
+	font-weight: normal;
+	height: 30px;
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+}
+
+td {
+	border: 1px grey solid;
+	padding: 5px;
+	font-size: 10px;
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+	background-color: white;
+	text-indent: -1000%;
+	overflow: hidden;
+}
+td:hover {
+	text-indent: 0%;
+}
+.corrMatrix th {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 50px;
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+}
+
+.bar rect {
+	transition: .9s all ease;
+}
+
+.bar rect:hover {
+	fill: rgb(255, 200, 0);
+	transition: .9s all ease;
+}
+.bar rect:not( :hover ) {
+	transition: fill 0.5s;
+}
+.bar text {
+	visibility: hidden;
+}
+
+#g:hover + #g.text {
+	visibility: visible;
+}
+
+.bar text {
+	fill: rgb(6,12,233);
+	font: 10px sans-serif;
+}

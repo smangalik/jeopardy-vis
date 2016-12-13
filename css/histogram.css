@@ -1,0 +1,27 @@
+.bar rect {
+ 	transition: .9s all ease;
+}
+	
+.bar rect:hover{
+	fill: rgb(255, 200, 0);
+	transition: .9s all ease;
+}
+.bar rect:not( :hover ){
+	transition: fill 0.5s;
+}
+.bar text{
+	visibility: hidden;
+	
+}
+#g:hover + #g.text {
+	visibility: visible;   
+}
+
+.bar text {
+	fill: rgb(6,12,233);
+	font: 10px sans-serif;
+}
+
+form {
+	display: inline;
+}

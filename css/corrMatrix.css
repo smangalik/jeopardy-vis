@@ -1,0 +1,42 @@
+ table {
+        border-collapse: collapse;
+        border:none;
+        text-align:center;
+    }
+    th  {
+        font-size: 12px;
+        font-weight:normal;
+        height: 30px;
+        border-collapse: collapse;
+        border:none;
+        text-align:center;        
+    }
+
+    td {
+        border: 1px grey solid;
+        padding: 5px;
+        font-size: 10px;
+        border-collapse: collapse;
+        border:none;
+        text-align:center;
+        background-color: white;
+        text-indent: -1000%;
+        overflow: hidden;
+        
+    }
+    td:hover{
+        text-indent: 0%;
+
+        
+    }
+    .corrMatrix th {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 50px;
+        border-collapse: collapse;
+        border:none;
+        text-align:center;
+        -webkit-transform: rotate(-90deg); 
+        -moz-transform: rotate(-90deg); 
+        
+    }

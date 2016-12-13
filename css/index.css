@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Gyparody";
+    src: url("gyparody.heavy.ttf") format("truetype");
+}
+
+form{
+	display: inline;
+}
+
+button.menu {
+	width: 220px;
+	height: 120px;
+	font-family: "Gyparody";
+    background-color: rgb(6,12,233); /* Jeopardy Blue */
+    border: none;
+    color: rgb(255, 200, 0); /* Jeopardy Yellow */
+    margin-top:4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button.dashmenu {
+	width: 668px;
+	height: 120px;
+	font-family: "Gyparody";
+    background-color: rgb(6,12,233); /* Jeopardy Blue */
+    border: none;
+    color: rgb(255, 200, 0); /* Jeopardy Yellow */
+    margin-top:4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+}
+
+button {
+	padding: 15px;
+	font-family: "Gyparody";
+    background-color: rgb(6,12,233); /* Jeopardy Blue */
+    border: none;
+    color: rgb(255, 200, 0); /* Jeopardy Yellow */
+    margin-top:4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
