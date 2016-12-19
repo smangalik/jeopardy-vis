@@ -28,7 +28,7 @@ to {
 }
 
 .brush .extent {
-	fill-opacity: .3;
+	fill-opacity: .2;
 	stroke: rgb(255, 200, 0);
 	shape-rendering: crispEdges;
 }
@@ -45,9 +45,10 @@ to {
 }
 
 .tooltip {
+	font: 12px sans-serif;
+	background: rgba(255, 200, 0, 0.5);	
 	position: absolute;
-	width: 200px;
-	height: 28px;
+	display:inline-block
 	pointer-events: none;
 }
 
@@ -55,6 +56,7 @@ table {
 	border-collapse: collapse;
 	border: none;
 	text-align: center;
+	overflow: hidden;
 }
 th {
 	font-size: 12px;
@@ -66,7 +68,6 @@ th {
 }
 
 td {
-	border: 1px grey solid;
 	padding: 5px;
 	font-size: 10px;
 	border-collapse: collapse;
@@ -77,6 +78,7 @@ td {
 	overflow: hidden;
 }
 td:hover {
+	border: 1px grey solid;
 	text-indent: 0%;
 }
 .corrMatrix th {
