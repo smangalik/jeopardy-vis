@@ -75,6 +75,16 @@ function scaleCells(id) {
 	var table = document.getElementById(id);
 	for (var r = 1,	n = table.rows.length; r < n; r++) {
 		for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+			table.rows[r].cells[c].onclick = function () {
+                // call the redraw functions
+                x_coordinate = this.cellIndex - 1; // [0-7]
+                y_coordinate = this.parentNode.rowIndex - 1; // [0-7]
+                console.log('Draw: ' + colNames[columns[x_coordinate]]
+                	+ ' by ' + colNames[columns[y_coordinate]]);
+                xySwitchTo(x_coordinate,y_coordinate);
+                document.getElementById('myDropdownX').selectedIndex = x_coordinate;
+				document.getElementById('myDropdownY').selectedIndex = y_coordinate;
+            };    
 			var value = +table.rows[r].cells[c].innerHTML;
 			if(value < 0)
 				table.rows[r].cells[c].style.backgroundColor = neg_color(value);
