@@ -1,14 +1,10 @@
-var colNames = ['Show','Round','Value','qLength','qHardWords',
-	'qDaleChall','aLength','hasMedia']; // indexed correctly
-var colIndex = 0; // number of the current column displayed
-	
-drawHS(0);
- 
-function drawHS(requestedColumn){
+
+function drawHS(){
 	
 	var data = d3.csv("Jeopardy5k.csv", function(error, data) {
 		if (error) throw error;
 		
+		requestedColumn = document.getElementById('myDropdownX').selectedIndex;
 		col_name = colNames[requestedColumn];
 		var col_array = [];
 		
@@ -21,9 +17,6 @@ function drawHS(requestedColumn){
 			else if (item == "Double Jeopardy!") item = 1;
     		col_array.push(item);
   		});
-  				
-		console.log(col_name);	
-		console.log(col_array);
 		
 		update(col_array);
 	});
@@ -47,8 +40,6 @@ function update(inputData){
     var bins = d3.layout.histogram()
         .bins(x.ticks(20))
         (values);
-
-	console.log(bins);
 
     var y = d3.scale.linear()
 	    .domain([0, d3.max(bins, function(d) { return d.length; })])
@@ -82,9 +73,9 @@ function update(inputData){
 	    
 	//bars
 	bar.append("rect")
+		.attr("class", "barRect")
 	    .attr("x", function(d,i) { return i*width/bins.length; })
 	    .attr("y", function(d,i) { return y(d.length); })
-	    //.attr("width", x(bins[0].x1) - x(bins[0].x0) - 1)
 	    .attr("width", 30)
 	    .attr("height", function(d) { return height - y(d.length); })
 	    .attr("fill", function(d) {
@@ -109,21 +100,41 @@ function update(inputData){
 			.attr("width", 30)
 			.attr("x", +d3.select(this).attr("x") + 2.5)
 			.attr("y", +d3.select(this).attr("y") + 10)
-			.attr("height", +d3.select(this).attr("height") - 10)
-			.attr("fill", function(d) {
-				return color(d.length);
-	   		});
+			.attr("height", +d3.select(this).attr("height") - 10);
+			//.attr("fill", function(d) {
+			//	return color(d.length);
+	   		//});
 			$(this).next().css("visibility","hidden");
 		})
-		.on("click", function () {
-			// update all graphs
+		.on("click", function (d,i) {
+			//update all graphs with info info in that bin
+			d3.select(this)
+			indices = [];
+			bin = bins[i];
+			let unique = [...new Set(bin)];
+			bin = unique; 
+			//push the index of every entry with a value in bin
+
+			//for (j = 0; j < bin.length; j++){
+			//	indices.push(inputData.indexOf(bin[j]));
+			//}
+			for(j = 0; j < inputData.length; j++){
+				for(k = 0; k < bin.length; k++){
+					if (inputData[j] == bin[k]){ 
+						indices.push(j); 
+					}		
+				}
+			}
+	
+			console.log(inputData);
+			console.log(bin);
+			console.log(indices);
+			brushAll(indices);
 		});
 	
 	//labels
 	var texts = bar.append("text")
-	    .attr("dy", "0.75em")
-	    .attr("y", 15)
-	    //.attr("x", this.parentNode.getAttribute("x"))
+	    .attr("y", -10)
 	    .attr("text-anchor", "middle")
 	    .text(function(d) { return formatCount(d.length); });
 	
@@ -132,4 +143,76 @@ function update(inputData){
 	    .attr("transform", "translate(0," + height + ")")
 	    .call(d3.svg.axis().scale(x).orient("bottom"));
 	    
+	// Handles a brush event, toggling the display of foreground lines.
+	HSbrushFunc = function(indices) {
+
+		//revert old status
+		d3.selectAll("rect.barRect").attr("fill", function(d) {
+			return color(d.length);
+	   	});
+		
+		// which data points are selected
+		var actives = [];
+		for(i = 0; i < indices.length; i++){
+			actives.push(inputData[(indices[i])]);
+		}
+				
+		// which bins are selected
+		var active_bins = [];
+		for(i = 0; i < bins.length; i++){
+		  bin = bins[i];
+		  for(j = 0; j < actives.length; j++){
+		  	done = false;
+		  	if (done) continue;
+	  		if(bin.indexOf(actives[j]) != -1){
+	  			done = true;
+	  			active_bins.push(i);
+	  		}
+		  }
+	 	}	
+	 	
+	 	let unique = [...new Set(active_bins)]; 
+	 	active_bins = unique;		
+
+		if (brush_type == "Highlight") {// make other bins gray
+			d3.selectAll("rect.barRect").attr("fill", function(d,i) {
+				if (active_bins.indexOf(i) == -1){
+					return "#ddd";
+				}
+				if (active_bins.indexOf(i) != -1){
+					return color(d.length);
+				}		
+	   		});
+	   	}
+	   		else if (brush_type == "Understate") {// make other bins gray
+			d3.selectAll("rect.barRect").attr("fill", function(d,i) {
+				if (active_bins.indexOf(i) == -1){
+					return color(d.length);
+				}
+				if (active_bins.indexOf(i) != -1){
+					return "#ddd";
+				}		
+	   		});	
+	   		
+		} else if (brush_type == "Filter") {// make other bins invisible
+			d3.selectAll("rect.barRect").attr("fill", function(d,i) {
+				if (active_bins.indexOf(i) == -1){
+					return "none";
+				}
+				if (active_bins.indexOf(i) != -1){
+					return color(d.length);
+				}		
+	   		});
+		} else if (brush_type == "Ignore") {// make only other bins visible
+			d3.selectAll("rect.barRect").attr("fill", function(d,i) {
+				if (active_bins.indexOf(i) == -1){
+					return color(d.length);
+				}
+				if (active_bins.indexOf(i) != -1){
+					return "none";
+				}		
+	   		});
+		}
+	}
+
 }
